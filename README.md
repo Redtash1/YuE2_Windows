@@ -1,272 +1,76 @@
-> Looking for the original YuE? Its code, documentation, and license are preserved on the **[YuE-v1 branch](https://github.com/multimodal-art-projection/YuE/tree/YuE-v1)**.
-
-<p align="center">
-  <img src="assets/logo.png" alt="YuE" width="150" />
-</p>
-
-<p align="center">
-  <picture>
-    <source media="(max-width: 600px)" srcset="assets/institutions-mobile.svg" />
-    <img src="assets/institutions.svg" alt="HKUST, M·A·P, Tokenwave.AI, NYU, Stanford, MBZUAI, NOIZ, and ACE Studio" width="760" />
-  </picture>
-</p>
+<div align="center">
 
-<h1 align="center">YuE2: Unifying Symbolic and Audio Music Generation at Frontier Quality</h1>
-
-<p align="center"><strong>Compose in symbols. Create in sound.</strong></p>
-
-<p align="center">
-  <a href="https://arxiv.org/abs/2609.33757">📄 arXiv</a> ·
-  <a href="docs/technical_report.pdf">PDF</a> ·
-  <a href="https://map-yue2.github.io/">🎧 Demos</a> ·
-  <a href="https://yue.noizai.net/">🚀 Try online (free)</a> ·
-  <a href="https://arena.3-148-255-99.sslip.io:8080">🗳️ Music Arena</a> ·
-  <a href="#news">📰 News</a> ·
-  <a href="https://huggingface.co/m-a-p/YuE2-3B">🤗 YuE2</a> ·
-  <a href="#quick-start">🚀 Quick start</a> ·
-  <a href="#agent-skill">🤖 Agent skill</a> ·
-  <a href="#benchmarks">📊 Benchmarks</a> ·
-  <a href="https://huggingface.co/m-a-p/MERT-v2-FullSong">🤗 MERT2</a> ·
-  <a href="https://huggingface.co/m-a-p/SheetSage2">🤗 SheetSage2</a> ·
-  <a href="https://huggingface.co/datasets/m-a-p/WildSongBench">🤗 WSB</a> ·
-  <a href="https://github.com/multimodal-art-projection/YuE/releases/tag/yue2-v0.1.6">📦 Release</a> ·
-  <a href="https://discord.gg/ssAyWMnMzu"><img alt="Join us on Discord" src="https://img.shields.io/discord/842440537755353128?color=5865F2&amp;logo=discord&amp;logoColor=white&amp;label=Discord&amp;style=flat-square" height="20" /></a>
-</p>
-
-<p align="center">
-  <a href="https://trendshift.io/repositories/32209">
-    <img src="https://trendshift.io/api/badge/repositories/32209" alt="YuE — GitHub Trending #1 Repository of the Day" width="250" height="55" />
-  </a>
-  <br />
-  <sub>All languages · September 14, 2026</sub>
-</p>
-
-<p align="center">
-  <a href="https://web.archive.org/web/20260917003427/https://huggingface.co/models?sort=trending">
-    <img src="https://img.shields.io/static/v1?label=HF%20Global%20Trending&amp;message=Reached%20%233&amp;color=FFD21E&amp;logo=huggingface&amp;logoColor=FFD21E" alt="Hugging Face Global Model Trending: reached #3 on September 17, 2026" height="20" />
-  </a>
-  <a href="https://huggingface.co/models?pipeline_tag=text-to-audio&amp;sort=trending">
-    <img src="https://img.shields.io/static/v1?label=HF%20Text-to-Audio%20Trending&amp;message=Reached%20%231&amp;color=FFD21E&amp;logo=huggingface&amp;logoColor=FFD21E" alt="Hugging Face Text-to-Audio Trending: reached #1 on September 20, 2026" height="20" />
-  </a>
-  <br />
-  <sub>Global: September 17, 2026 · Text-to-Audio: September 20, 2026</sub>
-</p>
-
-**YuE2 brings frontier song quality to music generation with an editable composition.** Give it lyrics and a style prompt: it writes a melody-and-chord plan, then realizes that plan as a complete song with vocals and accompaniment.
-
-<a id="music-arena"></a>
-
-> **🎧 YuE2 needs your ears**
->
-> We're running a public blind listening study comparing YuE2 with leading proprietary music generation systems. Hear anonymous clips and choose A, B, or a tie.
->
-> **[Listen & vote →](https://arena.3-148-255-99.sslip.io:8080)** · No account needed; headphones recommended.
-
-- **Frontier quality.** YuE2 is competitive with Suno v5/v6 on WildSongBench. YuE2 (best-of-8) achieves **6.9632 SongBench Avg**, the highest observed mean among all evaluated settings.
-- **White-box music generation through symbolic planning.** Read, play, and change the composition before rendering it. Melody and chords become explicit controls that a person or an agent can inspect and edit.
-- **Zero-shot covers and agentic editing.** Reimagine a transcribed song in a new style, or refine a song through a conversation about its score, arrangement, and lyrics—all with the same generation checkpoint.
-
-[![YuE2 song quality and text alignment on WildSongBench](assets/frontier-teaser.png)](https://map-yue2.github.io/#model-overview)
-
-*192 WildSongBench prompts. Both YuE2 settings use symbolic planning. Bo8 = best-of-8. The axes are normalized comparison indices; bubble area represents AudioBox production quality. [Scores and evaluation protocol](docs/benchmarks.md). [Vector PDF](assets/frontier-teaser.pdf) · [SVG](assets/frontier-teaser.svg).*
-
-## News
-
-- **📄 October 6, 2026 — SheetSage2 on arXiv.** Read the [paper](https://arxiv.org/abs/2610.05336) and use the [BibTeX citation](#citation).
-
-- **📄 October 2, 2026 — SheetSage2 technical report.** The [SheetSage2 report](docs/sheetsage2_technical_report.pdf) describes the transcription model used for covers and score editing: MIDI-derived synthetic supervision, structured decoding, and autoregressive distillation, with evaluations on eight benchmark collections.
-
-- **📄 September 29, 2026 — YuE2 on arXiv.** Read the [paper](https://arxiv.org/abs/2609.33757) and use the [BibTeX citation](#citation).
-
-- **📄 September 26, 2026 — YuE2 technical report.** Our [technical report](https://arxiv.org/abs/2609.33757) is now available, with the full model and training methods, automatic and expert listening results, and evaluations of score editing and zero-shot covers.
-- **🎹 September 25, 2026 — Instrumental generation and covers.** The [yue2-music agent skill](#agent-skill) now turns a simple description, ABC score, or reference recording into instrumental music. YuE2 writes the score by default; the skill moves the vocal melody into the instrumental part before rendering. **Recommended agent: GPT-6 Astra.** [Download the updated skill →](https://github.com/multimodal-art-projection/YuE/releases/download/yue2-music-v1.2.0/yue2-music.zip)
-- **🚀 Try YuE2 online for free.** Create a song in your browser with the [NOIZ-hosted demo →](https://yue.noizai.net/). No installation required.
-- **⚡ YuE2-Turbo.** [NOIZ's inference and serving toolkit →](https://github.com/NoizAI/YuE2-Turbo) accelerates YuE2 and supports concurrent requests.
-- **🎛️ ComfyUI.** YuE2 has native nodes and an [official text-to-music workflow →](https://github.com/Comfy-Org/workflow_templates/blob/main/templates/audio_yue2_text2music.json).
-- **🎬 Maestro.** [Maestro →](https://github.com/Blizaine/Maestro) includes YuE2 for local song generation, composition planning, and covers. [Creator's post →](https://x.com/blizaine/status/2101852048538968458)
-
-## Hear what you can make
 
-| Create | Cover | Edit with an agent |
-|---|---|---|
-| Lyrics + style → score → full song | Source recording → melody score → a new interpretation | Musical feedback → score, style, or lyric revisions → a new recording |
-| [Listen and inspect the score](https://map-yue2.github.io/#abc-cot-gen) | [Hear zero-shot covers](https://map-yue2.github.io/#cover) | [Follow an editing conversation](https://map-yue2.github.io/#agentic-music-editing) |
+# Features Low Vram for GPU Poor
 
-The agentic demo follows **The Last Train through 9 steps and 14 versions**, from Mandarin pop to English jazz with new harmony and a saxophone solo. Listen to each version and inspect its conversation, score, prompt, and lyrics.
 
-## How it works
+# DON'T CLONE THIS REPO, IT WON'T WORK AS IT ALL DEPENDS ON THE PYTHON_EMBEDED 3.12.10 TO WORK! 
 
-![YuE2 architecture: style and lyrics become an editable score, semantic music tokens, acoustic latents, and audio](assets/architecture.png)
 
-One **AR–NAR Mixture-of-Transformers** backbone predicts the score and semantic tokens autoregressively, then generates acoustic latents with flow matching. A VAE decodes those latents into stereo audio. Creation, covering, and editing differ in where the score comes from: YuE2, a transcribed recording, or an edited composition.
+## I made this YuE 2 Portable 1 click install for Windows that uses Nvidia GTX 10XX, 16XX, RTX Quadro, 20XX, 30XX, 40XX, 50XX GPU. Installs Torch with Cuda, Flash Attention, Triton & all other requirements also creates Launch YuE 2 & Music Desktop Shortcuts. Automatically saves generations into "outputs" folder. Automatically saves last used settings in .json file & loads them automatically on startup.
 
-The staged Python API exposes `plan()` → `generate_semantic()` → `synthesize()` → `decode()`. See the [generation guide](docs/generation.md) for exact-plan reuse and decoder selection.
 
-## Quick start
+## Click here to jump to Install 👉 [Installation](#-Installation) 👈
 
-**Linux · Python 3.12 · NVIDIA GPU with BF16 support and 24 GB VRAM.** YuE2 produces 48 kHz stereo audio without quantization. Model files download from Hugging Face on first use.
 
-```bash
-git clone https://github.com/multimodal-art-projection/YuE.git
-cd YuE
-python3.12 -m venv .venv
-source .venv/bin/activate
-python -m pip install --upgrade pip
-python -m pip install .
-python examples/generate.py --output outputs/first-song
-```
+![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/redtash1/krea_2_Windows_1_Click_Install/total?style=for-the-badge&labelColor=orange&color=0000ff)
 
-Open `outputs/first-song/audio.flac`. The output directory also retains the score, semantic tokens, acoustic latents, generation settings, and model identities.
 
-The Python interface is equally short:
 
-```python
-import json
-from pathlib import Path
-from yue2 import YuE2Pipeline
+</div> 
 
-request = json.loads(Path("examples/song.json").read_text(encoding="utf-8"))
-with YuE2Pipeline.from_pretrained("m-a-p/YuE2-3B", device="cuda") as pipe:
-    song = pipe(**request)
-    song.save_artifacts("outputs/my-song")
-    print(song.truncated)
-```
 
-| Setting | Behavior |
-|---|---|
-| `cot="full"` | Generate an editable melody-and-chord plan; the default for new songs |
-| `cot="melody"` | Use a melody plan with free accompaniment; recommended for covers |
-| `cot="off"` | Generate directly from lyrics and style |
-| `abc=...` | Supply your own score in `full` or `melody` mode |
+---
 
-[Generation guide](docs/generation.md) · [Original example inputs](examples/README.md) · [v0.1.6 wheel archive](https://github.com/multimodal-art-projection/YuE/releases/download/yue2-v0.1.6/yue2_infer-0.1.6-py3-none-any.whl)
 
-## Cover a song
+<img width="1907" height="1038" alt="Screenshot 2026-10-20 074050" src="https://github.com/user-attachments/assets/775b58a0-5c0a-4806-9f01-dfc3c117631e" />
 
-Transcribe a source recording with **[🤗 SheetSage2](https://huggingface.co/m-a-p/SheetSage2)**, review its melody ABC, and provide new lyrics or a target style. For covers, use **`cot="melody"` and a score without chord symbols** so the accompaniment can adapt to the new style.
 
-```python
-from pathlib import Path
-from yue2 import YuE2Pipeline
+----
 
-with YuE2Pipeline.from_pretrained("m-a-p/YuE2-3B", device="cuda") as pipe:
-    cover = pipe(
-        style="English, jazz-funk, warm lead vocal, Rhodes, bass and drums",
-        lyrics=Path("cover-lyrics.txt").read_text(encoding="utf-8"),
-        abc=Path("cover-score/score.abc").read_text(encoding="utf-8"),
-        cot="melody",
-        seed=42,
-    )
-    cover.save_artifacts("outputs/cover")
-```
 
-SheetSage2 runs in a separate environment and loads its MERT2 encoder automatically. The [cover guide](docs/covers.md) gives the complete transcription and generation commands. An included [original melody example](examples/melody.abc) also lets you try score-conditioned generation immediately.
+# 📦 Installation
 
-## Edit a composition
+## Nvidia GTX 10XX, 16XX, RTX Quadro, 20XX, 30XX, 40XX, 50XX 
 
-Export a plan, revise the musical details, and render the edited score:
+### Requirements: Minimum Ram 24GB & VRAM 6GB should work but not guaranteed. Recommend Ram 32GB & VRAM 8GB.
 
-```python
-import json
-from pathlib import Path
-from yue2 import YuE2Pipeline
 
-request = json.loads(Path("examples/song.json").read_text(encoding="utf-8"))
-with YuE2Pipeline.from_pretrained("m-a-p/YuE2-3B", device="cuda") as pipe:
-    plan = pipe.plan(**request)
-    plan.save("outputs/plan")
-```
+1. Make sure you have Git installed, if not download the Git Standalone Installer and click on Git for Windows/x64 Setup. 👉 [Git Standalone Installer Download](https://git-scm.com/downloads/win) 👈 To install Git, double click Git.exe and just keep clicking next until it's installed, you don't need to change anything.
 
-Copy `outputs/plan/score.abc` to `edited.abc`, then ask an agent to change its harmony, melody, tempo, or form. Supply the edited file as a new score:
 
-```bash
-python examples/generate.py --request examples/song.json \
-  --abc-file edited.abc --cot full --output outputs/edited
-```
+2. Make sure your Nvidia graphics drivers are up-to-date. If they are not or if your not sure, please click on the following link to download Nvidia graphics drivers. 👉 [Nvidia Drivers](https://www.nvidia.com/en-us/software/nvidia-app/) 👈
 
-The editable score is the white-box interface: you can inspect the intended composition and intervene on it. Editing generates a new complete recording; it does not preserve the original waveform outside an edit. [Editing guide and a reproducible harmony example](docs/editing.md).
+3. Make sure that you have NVIDIA's [CUDA Toolkit](https://developer.nvidia.com/cuda-toolkit) version **13.0** (or newer) installed on your system.
 
-## Agent skill
+4. Make sure you have FFMPEG Shared downloaded & on PATH. Download 👉 [ffmpeg-release-full-shared.7z](https://www.gyan.dev/ffmpeg/builds/) 👈
 
-The **[yue2-music skill](skills/yue2-music/SKILL.md)** teaches an agent how to generate songs and instrumental music, transcribe and cover recordings, edit ABC scores, check musical invariants, and organize listening comparisons. **We recommend GPT-6 Astra as the agent.** YuE2 remains the model that composes the default score and generates the audio.
+5.  Now after you have made sure Nvidia GPU drivers are up to date and Git is installed, download YuE 2 Windows 1 Click Install
+ from here 👉 [YuE 2 Windows 1 Click Install](https://github.com/Redtash1/krea_2_Windows_1_Click_Install/releases) 👈 or from the Releases section at the top right of this page.
 
-Use **`skills/yue2-music/` from this repository** or download the **[updated skill ZIP](https://github.com/multimodal-art-projection/YuE/releases/download/yue2-music-v1.2.0/yue2-music.zip)**. Install it using your agent's skill-directory or import mechanism. The song workflow uses the Python runtime installed with `pip install .`; the [instrumental workflow](skills/yue2-music/instrumental/SKILL.md) includes its own pinned setup recipe for the agent to follow. The earlier v0.1.6 release remains unchanged.
+6. After downloading, extract YuE 2 Windows 1 Click Install ZIP file and pick where you would like to extract the zip files too.
 
-For instrumental music, give the agent a simple request:
+7. Then open YuE 2 Windows 1 Click Install main folder, you will see this in the root
+----
 
-> Use the yue2-music skill to create gentle piano instrumental music for reading, with no vocals. Give me the playable audio and the full prompt.
+<img width="973" height="213" alt="Screenshot 2026-10-20 074254" src="https://github.com/user-attachments/assets/85275a6d-c0a2-48d9-ba67-ad9a5a033b18" />
 
-For an instrumental cover, attach a reference recording or ABC score:
+----
+8. Then double click on Install_YuE2.bat to start the installation. It will install everything.  After installation is finished, slowly scroll back up to the top to make sure everything installed correctly.
 
-> Turn this melody into an acoustic-guitar instrumental cover. Keep the melody and give me the audio and full prompt.
+9. To launch double click the Launch_YuE2.bat & it will automatically open in your default Internet Browser.
 
-The default flow is **YuE2 score → move Vocal notes to Ins → render**. Audio covers first use SheetSage2 to transcribe the reference. The agent composes a new score only when explicitly asked. The helpers preserve vocal-note pitches, onsets, and durations in the converted score and record overlapping parts; listening is still needed to check for vocal leakage and audible melody fidelity.
+---
 
-Try a concrete request:
 
-> Use the yue2-music skill to create an English piano-pop song. Keep the original audio and score. Make a second version with jazz harmony, preserve the vocal melody and lyric order, and give me both versions to compare.
+### If this worked for you, Please give it a Star ⭐. Thank you.
 
-## Benchmarks
+---
 
-**WildSongBench: 192 prompts, automatic evaluation, September 12, 2026.**
+## Thanks to:
+DeepBeepMeep for models, some YuE 2 code & MMGP for the GPU Poor. [Hugging Face](https://huggingface.co/DeepBeepMeep) [Github](https://github.com/deepbeepmeep)
 
-| System / setting | SongBench Avg ↑ | AudioBox PQ ↑ | MuLan ↑ | PER ↓ |
-|---|---:|---:|---:|---:|
-| **YuE2 (best-of-8)** † | **6.9632** | 8.2714 | 0.5051 | 9.79% |
-| Mureka 9 | 6.9377 | 8.0226 | 0.4394 | 11.69% |
-| Suno v5 | 6.8721 | 8.1698 | **0.5428** | 8.10% |
-| **YuE2** † | 6.7316 | 8.2598 | 0.5068 | 8.44% |
-| Suno v5.5 | 6.7150 | 8.1955 | 0.5089 | 5.96% |
-| Suno v4.5 | 6.6995 | 8.2541 | 0.5022 | **5.80%** |
-| Suno v6 | 6.5562 | 8.1296 | 0.4916 | 7.58% |
-| Suno v6 Wild | 6.4195 | 8.1785 | 0.4999 | 7.45% |
-| LeVo 2 † | 6.3247 | **8.3966** | 0.3542 | 26.12% |
-| MiniMax Music 2.6 | 6.3222 | 8.1711 | 0.4251 | 24.55% |
-| MiniMax Music 3 † | 6.2830 | 8.2825 | 0.3928 | 6.27% |
-| HeartMuLa † | 6.2483 | 8.2933 | 0.3823 | 10.71% |
-| Muse † | 6.0349 | 8.0517 | 0.3937 | 33.42% |
-| ACE-Step 1.5 † | 6.0118 | 8.0518 | 0.4372 | 7.46% |
-| DiffRhythm 2 † | 5.2428 | 7.9782 | 0.3782 | 18.41% |
-| YuE 1 † | 4.9165 | 7.8683 | 0.2623 | 36.38% |
-| SongBloom † | 4.2350 | 8.1539 | 0.2697 | 19.19% |
-
-† Publicly available model weights. All 17 evaluated settings are shown, sorted by SongBench Avg; bold values mark the best result in each column.
-
-Both YuE2 settings use symbolic planning and the benchmark decoder, **YuE2-Vae-legacy**. Standard YuE2 selects from two candidates; best-of-8 selects from eight. Rankings vary by metric; the small gap between the highest means does not establish statistical significance. [Full results and selection protocols](docs/benchmarks.md).
-
-**Zero-shot covers.** On 948 works, full-score YuE2 reaches **0.647 CLEWS mAP**, compared with **0.006 without a score**, while using the general generator without cover-specific fine-tuning. Source-identity preservation and target-style quality are measured separately; melody-only covers offer more freedom to change the arrangement. [Cover evaluation](docs/benchmarks.md#zero-shot-cover-generation).
-
-### Reproduce the benchmarks
-
-To reproduce the reported benchmark scores, follow the instructions on [🤗 WildSongBench (WSB)](https://huggingface.co/datasets/m-a-p/WildSongBench#reproduce-standard-yue2).
-
-## MERT2
-
-**State-of-the-art music understanding:** MERT2-30s leads on **14 of 15 MARBLE metrics**, and MERT2-FS (full-song) leads on **13 of 15**, each against the listed external baselines. MERT2-30s reaches **91.72% genre accuracy on GTZAN**.
-
-[Demo and results](https://map-yue2.github.io/#mert2) · [🤗 MERT2-30s](https://huggingface.co/m-a-p/MERT-v2-30s) · [🤗 MERT2-FS](https://huggingface.co/m-a-p/MERT-v2-FullSong)
-
-## SheetSage2
-
-**State-of-the-art audio-to-score transcription:** SheetSage2-AR leads on **12 of 15 benchmark metrics** in the reported comparison, including JAAH chord recognition and Rock Corpus vocal melody transcription. Vocal melody pitch-class F1 is **82.51% on RWC-Pop** and **67.08% on Rock Corpus**.
-
-[📄 arXiv](https://arxiv.org/abs/2610.05336) · [PDF](docs/sheetsage2_technical_report.pdf) · [Demo and results](https://map-yue2.github.io/#sheetsage2) · [🤗 Model and inference](https://huggingface.co/m-a-p/SheetSage2)
-
-## Models and resources
-
-| Resource | Purpose |
-|---|---|
-| [📄 YuE2 technical report](https://arxiv.org/abs/2609.33757) | Model, training, and evaluation details |
-| [📄 SheetSage2 paper](https://arxiv.org/abs/2610.05336) | Transcription method, training, and evaluation details |
-| [🤗 YuE2-3B](https://huggingface.co/m-a-p/YuE2-3B) | Song generation, symbolic planning, covering, and editing |
-| [🤗 YuE2-Vae](https://huggingface.co/m-a-p/YuE2-Vae) | Default generation and listening decoder |
-| [🤗 YuE2-Vae-legacy](https://huggingface.co/m-a-p/YuE2-Vae-legacy) | Decoder for the reported benchmark protocol |
-| [🤗 SheetSage2](https://huggingface.co/m-a-p/SheetSage2) | Audio-to-score transcription for covers and editing |
-| [🤗 MERT-v2-FullSong](https://huggingface.co/m-a-p/MERT-v2-FullSong) | Full-song music representations; SheetSage2's encoder |
-| [🤗 MERT-v2-30s](https://huggingface.co/m-a-p/MERT-v2-30s) | Music representations for short recordings |
-| [🤗 WildSongBench](https://huggingface.co/datasets/m-a-p/WildSongBench) | Evaluation prompts and benchmark resources |
-
-MERT2 feature extraction is optional for generation. YuE2's pipeline does not require a separate MERT2 model download. [Demos and interactive results](https://map-yue2.github.io/) · [Release downloads](https://github.com/multimodal-art-projection/YuE/releases/tag/yue2-v0.1.6).
+---
 
 ## License
 
