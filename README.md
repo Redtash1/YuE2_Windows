@@ -1,7 +1,7 @@
 <div align="center">
 
 
-# Features Low Vram for GPU Poor
+# YuE 2 Low Vram for GPU Poor
 
 
 # DON'T CLONE THIS REPO, IT WON'T WORK AS IT ALL DEPENDS ON THE PYTHON_EMBEDED 3.12.10 TO WORK! 
