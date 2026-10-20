@@ -13,7 +13,7 @@
 ## Click here to jump to Install 👉 [Installation](#-Installation) 👈
 
 
-![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/redtash1/krea_2_Windows_1_Click_Install/total?style=for-the-badge&labelColor=orange&color=0000ff)
+![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/redtash1/YuE2_Windows/total?style=for-the-badge&labelColor=orange&color=0000ff)
 
 
 
