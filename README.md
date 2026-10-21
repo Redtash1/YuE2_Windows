@@ -41,7 +41,7 @@
 
 2. Make sure your Nvidia graphics drivers are up-to-date. If they are not or if your not sure, please click on the following link to download Nvidia graphics drivers. 👉 [Nvidia Drivers](https://www.nvidia.com/en-us/software/nvidia-app/) 👈
 
-3. Make sure that you have NVIDIA's [CUDA Toolkit](https://developer.nvidia.com/cuda-toolkit) version **13.0** (or newer) installed on your system.
+3. Make sure that you have NVIDIA's 👉 [CUDA Toolkit](https://developer.nvidia.com/cuda-toolkit) 👈 version **13.0** (or newer) installed on your system.
 
 4. Make sure you have FFMPEG Shared downloaded & on PATH. Download 👉 [ffmpeg-release-full-shared.7z](https://www.gyan.dev/ffmpeg/builds/) 👈
 
